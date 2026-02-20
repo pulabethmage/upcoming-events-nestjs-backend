@@ -18,30 +18,18 @@ export class ItemsController {
         return this.itemsService.findOne(parseInt(id));
     }
 
-    //   @Get(':id/:id2')
-    // findOne(@Param('id') id: string, @Param('id2') id2: string): string {
-    //     return `Item 1 #${id} ,item 2 # ${id2}`;
-    // }
-
-    // @Post()
-    // create(@Body() createItemDto: CreateItemDto): string {
-    //     return `This action adds a new item with name: ${createItemDto.name}`;
-    // }
-
     @Post()
-    async create(@Body() createItemDto: any) {
+    async create(@Body() createItemDto: CreateItemDto) {
     return this.itemsService.create(createItemDto);
     }
 
-
-
     @Put(':id')
-    async update(@Body() updateItemDto: any, @Param('id') id: string): Promise<Item | null> {
+    async update(@Body() updateItemDto: CreateItemDto, @Param('id') id: string): Promise<Item | null> {
         return this.itemsService.update(parseInt(id), updateItemDto);
     }       
 
     @Delete(':id')
-    async delete(@Param('id') id: string): Promise<void> {
-        await this.itemsService.delete(parseInt(id));   
+    async delete(@Param('id') id: string): Promise<Item | null > {
+        return this.itemsService.delete(parseInt(id));   
     }   
 }
