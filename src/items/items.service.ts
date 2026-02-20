@@ -32,7 +32,11 @@ export class ItemsService {
         return this.itemsRepository.save(item);
     }
 
-    async delete(id: number): Promise<void> {
-        await this.itemsRepository.delete(id);
+    async delete(id: number): Promise<Item | null> {
+        const item = await this.itemsRepository.findOneBy({ id });
+        if (!item) {
+            return null;
+        }
+        return this.itemsRepository.remove(item);
     }   
 }
