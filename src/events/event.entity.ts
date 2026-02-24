@@ -23,4 +23,5 @@ export class Event {
     @Column()
     eventUrl: string;
 
+
 }
